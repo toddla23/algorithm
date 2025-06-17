@@ -2,13 +2,17 @@ n = int(input())
 m = int(input())
 s = input()
 
-a = "I"
-for i in range(n):
-    a = a + "OI"
+answer, i, count = 0, 0, 0
 
-count = 0
-for i in range(m - len(a) + 1):
-    print(s[i : i + len(a)])
-    if a == s[i : i + len(a)]:
+while i < (m - 1):
+    if s[i : i + 3] == "IOI":
+        i += 2
         count += 1
-print(count)
+        if count == n:
+            answer += 1
+            count -= 1
+    else:
+        i += 1
+        count = 0
+
+print(answer)
