@@ -7,22 +7,39 @@ t = int(input())
 
 for _ in range(t):
     k = int(input())
-    heap = []
-    isBreak = False
-    for _ in range(k):
-        calc, n = input().rstrip().split(" ")
-        n = int(n)
-        if calc == 'I':
-            heapq.heappush(heap, n)
-        if(len(heap) != 0):
-            if calc == 'D' and n == -1:
-                heapq.heappop(heap)
-            if calc == 'D' and n == 1:
-                heap.pop()
-        # print(heap)
-    
-    if(len(heap) == 0):
-        print('EMPTY')
+    min_heap = []
+    max_heap = []
+    visited = [False] * k  
+
+    for i in range(k):
+        cmd, num = input().split()
+        num = int(num)
+
+        if cmd == 'I':
+            heapq.heappush(min_heap, (num, i))
+            heapq.heappush(max_heap, (-num, i))
+            visited[i] = True
+
+        elif cmd == 'D':
+            if num == 1:
+                while max_heap and not visited[max_heap[0][1]]:
+                    heapq.heappop(max_heap)
+                if max_heap:
+                    visited[max_heap[0][1]] = False
+                    heapq.heappop(max_heap)
+            elif num == -1:
+                while min_heap and not visited[min_heap[0][1]]:
+                    heapq.heappop(min_heap)
+                if min_heap:
+                    visited[min_heap[0][1]] = False
+                    heapq.heappop(min_heap)
+
+    while max_heap and not visited[max_heap[0][1]]:
+        heapq.heappop(max_heap)
+    while min_heap and not visited[min_heap[0][1]]:
+        heapq.heappop(min_heap)
+
+    if not min_heap or not max_heap:
+        print("EMPTY")
     else:
-        print(heap[-1], heap[0])
-        
+        print(-max_heap[0][0], min_heap[0][0])
