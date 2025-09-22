@@ -8,15 +8,14 @@ found = False
 def calc(s, a, b, arr, count):
     global answer
     global found
-    
-    
+
     # saywoo1021@kookmin.ac.kr
 
     if found:
         return s
 
     arr[a][b] = count
-    
+
     # print(count)
     # for i in arr:
     #         print(i)
@@ -30,8 +29,8 @@ def calc(s, a, b, arr, count):
 
         return count
 
-    x = [2, 2, -2, -2, 1, 1, -1, -1]
-    y = [1, -1, 1, -1, 2, -2, 2, -2]
+    x = [-2, -1, 1, 2, 2, 1, -1, -2]
+    y = [1, 2, 2, 1, -1, -2, -2, -1]
     # if arr[a][b] != 0:
     #     return
 
@@ -47,7 +46,7 @@ def calc(s, a, b, arr, count):
         #     result = calc(s, p, q, arr, count + 1)
 
     arr[a][b] = 0
-    
+
     return result
 
 
