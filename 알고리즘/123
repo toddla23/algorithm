@@ -1,0 +1,26 @@
+#사용자로부터 행렬 크기 입력
+maxavalue = int (input("입력으로 넣을 관계행렬의 크기를 입력하라.: "))
+print("#n")
+print("1과 0으로 구성된 ", maxavalue, "", maxavalue, "인 관계행렬을 입력하라. : ", sep='')
+#사용자 입력 저장
+data = []
+while len(data) < maxavalue maxavalue:
+data += input().split()
+#문자열 → 정수로 변환하여 관계행렬 에 저장
+for i in range(1, maxavalue + 1):
+for j in range(1, maxavalue + 1):
+m[i] [j]= int(data[(i- 1) maxavalue + (j - 1)])
+#길이 3의 경로 탐색
+print("주어진 관계행렬에 대해 길이가 3인 경로들의 리스트는 다음과 같다. : th")
+count =0
+for i in range(1, maxavalue + 1):
+for j in range(1, maxavalue + 1):
+if m[i] [j] == 1:
+for x in range(1, maxavalue + 1):
+if m[j][x] == 1:
+for y in range(1, maxavalue + 1):
+if m[x] [y] == 1:
+print("(%d-%p→%p→%d) => (%d..%d)#n" % (і, J, х, y, i, y), end='')
+count += 1
+if count == 0:
+print("주어진 관계행렬에 대해 길이가 3인 경로가 없다. ")

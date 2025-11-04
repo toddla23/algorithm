@@ -1,25 +1,33 @@
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
+# 사용자로부터 행렬 크기 입력
+maxavalue = int(input("입력으로 넣을 관계행렬의 크기를 입력하라.: "))
+print("#n")
+print(
+    "1과 0으로 구성된 ", maxavalue, "", maxavalue, "인 관계행렬을 입력하라. : ", sep=""
+)
+# 사용자 입력 저장
+data = []
+m = [[]]
+while len(data) < maxavalue:
+    data += input().split()
+# 문자열 → 정수로 변환하여 관계행렬 에 저장
+for i in range(1, maxavalue + 1):
+    for j in range(1, maxavalue + 1):
+        m[i][j] = int(data[(i - 1)] + data[(j - 1)])
 
-SMTP_HOST = "smtp.gmail.com"
-SMTP_PORT = 587  # STARTTLS
-USER = "qkrwhdgur0319@gmail.com"          # 전체 이메일 주소
-APP_PASSWORD = "ovzp rauv qgod wkok"   # 16자리 앱 비밀번호(공백 없이 붙여써도 됩니다)
-
-TO = "qkrwhdgur0319@kookmin.ac.kr"
-
-msg = MIMEMultipart()
-msg["From"] = USER
-msg["To"] = TO
-msg["Subject"] = "SMTP 테스트(STARTTLS)"
-msg.attach(MIMEText("테스트 본문입니다.", "plain"))
-
-server = smtplib.SMTP(SMTP_HOST, SMTP_PORT)
-server.set_debuglevel(1)          # 문제 시 상세 로그 확인용
-server.ehlo()
-server.starttls()
-server.ehlo()
-server.login(USER, APP_PASSWORD)  # 앱 비밀번호 사용
-server.sendmail(USER, TO, msg.as_string())
-server.quit()
+# 길이 3의 경로 탐색
+print("주어진 관계행렬에 대해 길이가 3인 경로들의 리스트는 다음과 같다. : th")
+count = 0
+for i in range(1, maxavalue + 1):
+    for j in range(1, maxavalue + 1):
+        if m[i][j] == 1:
+            for x in range(1, maxavalue + 1):
+                if m[j][x] == 1:
+                    for y in range(1, maxavalue + 1):
+                        if m[x][y] == 1:
+                            print(
+                                "(%d-%p→%p→%d) => (%d..%d)#n" % (і, j, х, y, i, y),
+                                end="",
+                            )
+count += 1
+if count == 0:
+    print("주어진 관계행렬에 대해 길이가 3인 경로가 없다. ")
