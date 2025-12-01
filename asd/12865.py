@@ -8,6 +8,7 @@ def calc(weight, stuff):
     
     for i in range(len(stuff)):
         stuffWeight, stuffValue = stuff[i]
+        print(stuffWeight, stuffValue)
         for j in range(1, weight+1):
             if stuffWeight > j:
                 values[i][j] = values[i-1][j]
@@ -15,6 +16,9 @@ def calc(weight, stuff):
                 value1 = values[i-1][j] # 나 없을떄의 최대값
                 value2 = values[i-1][j-stuffWeight] + stuffValue # 나 있을때 최대값
                 values[i][j] = max(value1, value2)
+        for k in values:
+            print(k)
+        print("________________________________")
 
     
     return values[len(stuff)-1][weight]
