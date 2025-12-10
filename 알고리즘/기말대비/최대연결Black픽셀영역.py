@@ -3,43 +3,45 @@ from collections import deque
 
 input = sys.stdin.readline
 
+dx = [1, -1, 0, 0]
+dy = [0, 0, 1, -1]
 
-def bfs(sr, sc, grid, visited):
-    q = deque([(sr, sc)])
-    visited[sr][sc] = True
-    cnt = 1
 
-    while q:
-        r, c = q.popleft()
+def dfs(startX, startY, map, isVisit, r, c):
+    count = 1
+    toVisit = deque([(startX, startY)])
+    isVisit[startX][startY] = True
 
-        for dr, dc in dirs:
-            nr, nc = r + dr, c + dc
-            if 0 <= nr < n and 0 <= nc < m:
-                if not visited[nr][nc] and grid[nr][nc] == "#":
-                    visited[nr][nc] = True
-                    cnt += 1
-                    q.append((nr, nc))
-    return cnt
-
+    while toVisit:
+        x, y = toVisit.popleft()
+        for i in range(4):
+            tx = x + dx[i]
+            ty = y + dy[i]
+            if (0 <= tx < r and 0 <= ty < c) and not isVisit[tx][ty] and map[tx][ty] == '#':
+                toVisit.append((tx, ty))
+                isVisit[tx][ty] = True
+                count+=1
+    # print(count)
+    return count
 
 t = int(input())
-
-dirs = [(1, 0), (-1, 0), (0, 1), (0, -1)]
-
 for _ in range(t):
-    n, m = map(int, input().split())
-    grid = [list(input().strip()) for _ in range(n)]
-    visited = [[False] * m for _ in range(n)]
+    r, c = list(map(int, input().split()))
 
-    max_area = 0
+    isVisit = [[False for _ in range(c)] for _ in range(r)]
 
-    for i in range(n):
-        for j in range(m):
-            if grid[i][j] == "#" and not visited[i][j]:
-                max_area = max(max_area, bfs(i, j, grid, visited))
+    arr = []
+    for _ in range(r):
+        tmep = input().rstrip()
+        arr.append(tmep)
 
-    print(max_area)
-    for i in grid:
-        print(i)
-    for i in visited:
-        print(i)
+
+    # print(arr)
+    # print(arr[0][0])
+    answer = 0
+    for i in range(r):
+        for j in range(c):
+            if not isVisit[i][j] and arr[i][j] == '#':
+                answer = max(dfs(i,j,arr,isVisit,r,c), answer)
+                
+    print(answer)

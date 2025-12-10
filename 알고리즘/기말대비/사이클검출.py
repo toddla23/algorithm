@@ -1,25 +1,20 @@
-n, m = list(map(int, input().split()))
+def union(x, y, arr):
+    arr[y] = arr[x]
 
 
-def find(x, parents):
-    if parents[x] != x:
-        parents[x] = find(parents[x], parents)
-    return parents[x]
+t = int(input())
+for _ in range(t):
+    n, m = list(map(int, input().split()))
 
+    arr = [i for i in range(n+1)]
 
-def union(x, y, parents):
-    parents[y] = x
-
-
-parents = [i for i in range(n + 1)]
-
-answer = 0
-for i in range(m):
-    u, v = list(map(int, input().split()))
-    ru = find(u, parents)
-    rv = find(v, parents)
-    if ru == rv:
-        answer = 1
-    else:
-        union(ru, rv, parents)
-print(answer)
+    answer = 0
+    for _ in range(m):
+        u, v = list(map(int, input().split()))
+        if arr[u] == arr[v]:
+            answer = 1
+        union(u, v, arr)
+        
+        
+        # print(arr)
+    print(answer)

@@ -1,3 +1,8 @@
+import sys
+
+sys.setrecursionlimit(10**7)
+
+
 def postToTree(postOrder, inOrder):
     # print(postOrder, inOrder)
     global dic
@@ -30,7 +35,8 @@ def preToTree(preOrder, inOrder):
         return 0
     if len(preOrder) == 1:
         dic[preOrder[0]] = [0, 0]
-
+        return preOrder[0]
+    
     root = preOrder[0]
     rootSpot = inOrder.index(root)
     preOrderLeft = preOrder[1 : rootSpot + 1]
@@ -65,23 +71,26 @@ def postOrder(dic, root, answer):
     return
 
 
-dic = {}
-n, q = list(map(int, input().split()))
+t = int(input())
+for _ in range(t):
+    dic = {}
+    n, q = list(map(int, input().split()))
+    temp = list(map(int, input().split()))
 
-temp = list(map(int, input().split()))
+    inorder = temp[:]
+    inorder.sort()
+    if q == 1:
+        root = preToTree(temp, inorder)
+        # print(dic),
+        answer = []
+        postOrder(dic, root, answer)
+        print(" ".join(list(map(str, answer))))
 
-inorder = temp[:]
-inorder.sort()
-if q == 1:
-    root = preToTree(temp, inorder)
-    print(dic),
-    answer = []
-    postOrder(dic, root, answer)
-    print(answer)
+    if q == 2:
+        root = postToTree(temp, inorder)
+        # print(dic)
+        answer = []
+        preOrder(dic, root, answer)
+        print(" ".join(list(map(str, answer))))
 
-if q == 2:
-    root = postToTree(temp, inorder)
-    print(dic)
-    answer = []
-    preOrder(dic, root, answer)
-    print(answer)
+

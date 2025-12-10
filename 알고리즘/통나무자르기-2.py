@@ -21,11 +21,4 @@ def calc(spot):
 
     return costs[0][n-1]
 
-
-# n = int(input())
-# for _ in range(n):
-#     l, t = list(map(int, input().split()))
-#     arr = list(map(int, input().split()))
-#     spot = [0] + arr + [l]
-#     print(calc(spot))
 calc([0,2,6,7,10])

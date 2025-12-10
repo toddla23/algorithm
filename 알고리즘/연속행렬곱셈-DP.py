@@ -1,4 +1,5 @@
 def matrix_chain_order(d):
+    print(d)
     n = len(d) - 1  # 행렬 개수
     dp = [[0] * (n + 1) for _ in range(n + 1)]
     split = [[0] * (n + 1) for _ in range(n + 1)]
@@ -13,7 +14,10 @@ def matrix_chain_order(d):
                 if cost < dp[i][j]:
                     dp[i][j] = cost
                     split[i][j] = k
-
+    print("___________________")
+    for i in split:
+        print(i)
+    print("___________________")
     return dp, split
 
 
@@ -28,11 +32,10 @@ def print_paren(split, i, j):
 
 
 # 실행 부분
-t = int(input().strip())
-for _ in range(t):
-    n = int(input().strip())
-    d = list(map(int, input().strip().split()))
-    dp, split = matrix_chain_order(d)
-    formula = print_paren(split, 1, n)
-    print(formula)
-    print(dp[1][n])
+
+n = int(input().strip())
+d = list(map(int, input().strip().split()))
+dp, split = matrix_chain_order(d)
+formula = print_paren(split, 1, n)
+print(formula)
+print(dp[1][n])
