@@ -11,7 +11,11 @@ def insert(heapq, item):
     return heapq
         
 
+<<<<<<< HEAD
 heapq = [456]
+=======
+heapq = [1,2]
+>>>>>>> 345
 answer = []
 insert(heapq, 9)
 insert(heapq, 8)
