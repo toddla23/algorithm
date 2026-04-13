@@ -11,7 +11,7 @@ def insert(heapq, item):
     return heapq
         
 
-heapq = []
+heapq = [1,2]
 answer = []
 insert(heapq, 9)
 insert(heapq, 8)
